@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import ContactService from "../services/ContactService";
+import React, { useEffect, useState } from 'react';
+import ContactService from '../services/ContactService';
 
 let ContactList = (props) => {
   let [state, setState] = useState({
@@ -7,15 +7,21 @@ let ContactList = (props) => {
   });
 
   useEffect(async () => {
-    try {
-      let response = await ContactService.getContactList();
-      setState(() => ({
-        contacts: response.data,
-      }));
-    } catch (error) {
-      console.log(error);
-    }
-  });
+    const fetchData = async () => {
+      try {
+        let response = await ContactService.getContactList();
+        // Use the functional update form if the new state depends on the old
+        setState((prevState) => ({
+          ...prevState, // Spread the old state
+          contacts: response.data, // Update the contacts
+        }));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   let { contacts } = state;
 
@@ -27,8 +33,8 @@ let ContactList = (props) => {
     <React.Fragment>
       {/* <pre>{JSON.stringify(state.contacts)}</pre> */}
 
-      <table className="table table-hover text-center table-striped">
-        <thead className="bg-dark text-white">
+      <table className='table table-hover text-center table-striped'>
+        <thead className='bg-dark text-white'>
           <tr>
             <th>SNO</th>
             <th>Name</th>
@@ -41,13 +47,8 @@ let ContactList = (props) => {
           {contacts.length > 0 &&
             contacts.map((contact) => {
               return (
-                <tr
-                  key={contact.login.uuid}
-                  onClick={() => clickContact(contact)}
-                >
-                  <td>
-                    {contact.login.uuid.substr(contact.login.uuid.length - 5)}
-                  </td>
+                <tr key={contact.login.uuid} onClick={() => clickContact(contact)}>
+                  <td>{contact.login.uuid.substr(contact.login.uuid.length - 5)}</td>
                   <td>
                     {contact.name.first} {contact.name.last}
                   </td>
