@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import ContactCard from "./ContactCard";
-import ContactList from "./ContactList";
+import React, { useState } from 'react';
+import ContactCard from './ContactCard';
+import ContactList from './ContactList';
 
 let ContactApp = () => {
   let [state, setState] = useState({
@@ -16,24 +16,22 @@ let ContactApp = () => {
   return (
     <React.Fragment>
       {/* <pre>{JSON.stringify(selectedContact)}</pre> */}
-      <div className="container mt-3">
-        <div className="row">
-          <div className="col">
-            <p className="h3 text-success">Contact App</p>
+      <div className='container mt-3'>
+        <div className='row'>
+          <div className='col'>
+            <p className='h3 text-success'>Contact App</p>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum
-              tempore maiores omnis totam, cumque aliquid vel illum nihil ea.
-              Quis ut labore culpa veniam ex alias sunt quia. Maxime,
-              perspiciatis.
+              Select any of the contacts below to display their picture, email, age, and location. This data was fetched
+              from a URL using Axios Javascript Library.
             </p>
           </div>
         </div>
-        <div className="container mt-3">
-          <div className="row">
-            <div className="col-md-9">
+        <div className='container mt-3'>
+          <div className='row'>
+            <div className='col-md-9'>
               <ContactList sendContact={receiveContact} />
             </div>
-            <div className="col-md-3">
+            <div className='col-md-3'>
               <ContactCard selectedContact={selectedContact} />
             </div>
           </div>
