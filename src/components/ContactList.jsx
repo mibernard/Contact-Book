@@ -6,7 +6,7 @@ let ContactList = (props) => {
     contacts: [],
   });
 
-  useEffect(async () => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         let response = await ContactService.getContactList();
